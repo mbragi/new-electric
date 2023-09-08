@@ -1,11 +1,13 @@
 // import React, { useState } from 'react';
+'use client'
 import { Modal } from 'antd';
 import { redirect, useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 
 
-const SigninModal = ({setIsSignInModalOpen}:{setIsSignInModalOpen : React.Dispatch<React.SetStateAction<boolean>>}) => {
+const SigninModal = ({ setIsSignInModalOpen }: { setIsSignInModalOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  const [loading,setLoading]= useState(false)
   const handleOk = () => {
     setIsSignInModalOpen(false)
   };
@@ -25,6 +27,7 @@ const SigninModal = ({setIsSignInModalOpen}:{setIsSignInModalOpen : React.Dispat
   
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true)
     let obj = {
       ...data
     };
@@ -40,11 +43,14 @@ const SigninModal = ({setIsSignInModalOpen}:{setIsSignInModalOpen : React.Dispat
       if (typeof window !== 'undefined') {
         localStorage.setItem('user', JSON.stringify(data))
       }
+      setLoading(false);
       alert('Sign in successful')
       setIsSignInModalOpen(false)
       router.push('/dashboard')
       return
     }
+      setLoading(false);
+    alert('Sign in failed')
   }
 
   return (
@@ -82,9 +88,10 @@ const SigninModal = ({setIsSignInModalOpen}:{setIsSignInModalOpen : React.Dispat
           <input className='w-full text-xl' type='password' placeholder='Enter Your Password' name='password' onChange={handleInputChange} />
             </div>
             
-             <button type='submit' className='w-full rounded-lg bg-blue-900 text-white text-lg hover:bg-slate-600 p-3 mt-4'>
-              submit
-        </button>
+             <button disabled={loading} type='submit' className='w-full rounded-lg bg-blue-900 text-white text-lg hover:bg-slate-600 p-3 mt-4'>
+              
+            {loading ? 'Loading...' : 'submit'}
+            </button>
         </form>
       </Modal>
       {/* <div className='bg-white max-w-[10rem]'>
