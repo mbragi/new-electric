@@ -53,7 +53,7 @@ const Navbar = () => {
             {/* <h1 className='text-3xl font-bold mr-6 sm:text-4xl'>E-Billing</h1> */}
             <ul className='flex flex-col'>
               <li><a href="/" className='font-bold text-lg'>Home</a></li>
-              <li><Link href=" " className='font-bold text-lg'>Princing</Link></li>
+              
             </ul>
           </div>
           <div className='flex justify-between pr-4'>
