@@ -2,7 +2,7 @@ import { Schema, model, models } from "mongoose";
 // 1. Create an interface representing a document in MongoDB.
 interface Bills {
  accountOwner: Schema.Types.ObjectId;
- company: string;
+ token: string;
  amount: number;
  meterNumber: string;
  phoneNumber: string;
@@ -30,6 +30,10 @@ const BillsSchema = new Schema<Bills>({
  amount: {
   type: Number,
   required: [true, 'Amount is required']
+ },
+ token: {
+  type: String,
+  required: [true, 'Token is required']
  },
 
  meterNumber: {

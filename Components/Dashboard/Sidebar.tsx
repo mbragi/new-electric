@@ -11,7 +11,7 @@ const Sidebar = (props: Props) => {
       <ul className='mt-8 '>
         <li className="mb-2 mt-4 border-2 rounded-xl text-xl text-center bg-slate-900 text-white " > <Link href="/dashboard"> Dashboard </Link> </li>
         <li className="mb-2 mt-8 border-2 rounded-xl text-xl text-center bg-slate-900 text-white "> <Link href="/profile">Profile </Link></li>
-        <li className="mb-2 mt-8 border-2 rounded-xl text-xl text-center bg-slate-900 text-white "> <Link href='/'>Settings </Link></li>
+        
       </ul>
     </div>
   )

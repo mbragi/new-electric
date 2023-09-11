@@ -53,7 +53,6 @@ const MainContent = ({data}:{data: any}) => {
     if (res.ok) {
       const  body = await res.json()
       alert('Payment successful')
-      return
     }
     setSelectedOption1('')
     setSelectedOption2('')

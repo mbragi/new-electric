@@ -1,11 +1,18 @@
 import { connectToDB } from '@/utils/database';
 import Bills from '@/models/bill.model';
 import sendEmail from '@/utils/mailer';
+import { generateFormattedToken } from '@/utils/token';
 
 export async function POST(request: Request) {
  await connectToDB();
  try {
-  const body = await request.json();
+   const body = await request.json();
+   // add token to body 
+ 
+    const formattedToken = generateFormattedToken()
+
+    // Add the formatted token to the body
+    body['token'] = formattedToken;
    const bill = new Bills(body);
    await bill.save();
    const html = `
@@ -37,6 +44,7 @@ export async function POST(request: Request) {
         <h1>Electricity Bill Payment Receipt</h1>
         <p>Dear Customer,</p>
         <p>You have successfully paid the sum of ${bill.amount.toFixed(2)} Naira for Meter No ${bill.meterNumber}.</p>
+        <h1>Your Token Number is ${bill.token}.</h1>
         <p>Thank you for choosing our service!</p>
       </div> 
     </body>
