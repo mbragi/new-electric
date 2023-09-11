@@ -1,7 +1,8 @@
-import nodemailer from "nodemailer";
-console.log(process.env.MAILER_PASSWORD);
+import  nodemailer from "nodemailer";
+import Mail from "nodemailer/lib/mailer"
+// console.log(process.env.MAILER_PASSWORD);
 
-let transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   port: 465,
   host: "smtp.zoho.com",
   from: "info@bluehouseng.com",
@@ -13,7 +14,7 @@ let transporter = nodemailer.createTransport({
   tls: { rejectUnauthorized: false },
 });
 
-transporter.verify((error, success) => {
+transporter.verify((error: Error | null, success: boolean) => {
   if (error) {
     console.log(error.message);
   } else {
@@ -24,9 +25,14 @@ transporter.verify((error, success) => {
   }
 });
 
-async function sendEmail(to, subject, text, html) {
+async function sendEmail(
+  to: string,
+  subject: string,
+  text: string,
+  html: string
+): Promise<void> {
   try {
-    const mailOptions = {
+    const mailOptions : Mail.Options  = {
       from: '"Christian Electricity" <info@bluehouseng.com>',
       to,
       subject,
@@ -34,7 +40,7 @@ async function sendEmail(to, subject, text, html) {
       html,
     };
 
-    transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
     console.log("Email sent successfully!");
   } catch (error) {
     console.error("Error sending email:", error);
