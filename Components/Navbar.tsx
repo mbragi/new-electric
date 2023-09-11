@@ -33,7 +33,7 @@ const Navbar = () => {
           <h1 className='text-3xl font-bold mr-6 sm:text-4xl'>E-Billing</h1>
           <ul className='hidden gap-4 md:flex'>
             <li><Link href='/home' className='font-bold text-lg'>Home</Link></li>
-            <li onClick={handleScrollTo} className='font-bold text-lg cursor-pointer'>Princing</li>
+         
           </ul>
         </div>
         <div className='hidden md:flex pr-4'>
